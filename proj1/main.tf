@@ -10,7 +10,8 @@ provider "aws" {
 module "spark" {
   source                     = "../modules/compute/spark"
   security_group_id          = module.sg.sg_security_group_id
-  subnet_id                  = module.eip.eip_id
+  subnet_id                  = module.eip.vpc_subnet_id
+  vpc_id                     = module.eip.vpc_id
   primary_node_key_name      = "ubuntu-aws-test1"
   data_node_key_name         = "ubuntu-aws-test1"
   private_key_path           = "/home/ubuntu/ubuntu-aws-test1.pem"
@@ -21,7 +22,7 @@ module "spark" {
 
 module "sg" {
   source        = "../modules/security/sg"
-  vpc_id        = module.eip.eip_id
+  vpc_id        = module.eip.vpc_id
   inbound_ports = [80, 22, 8080, 9000, 50070]
 }
 

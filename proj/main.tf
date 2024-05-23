@@ -11,15 +11,16 @@ module "mongodb" {
   source            = "../modules/databases/mongodb"
   instance_type     = "t2.micro"
   security_group_id = module.sg.sg_security_group_id
-  subnet_id         = module.eip.eip_id
+  subnet_id         = module.eip.vpc_subnet_id
   mongodb_key_name  = "ubuntu-aws-test1"
   private_key_path  = "/home/ubuntu/ubuntu-aws-test1.pem"
+  eip               = module.eip.eip_id
 }
-
 module "sg" {
   source        = "../modules/security/sg"
-  vpc_id        = module.eip.eip_id
+  vpc_id        = module.eip.vpc_id
   inbound_ports = [80, 22, 443, 8080, 8443, 8090, 389, 636]
+
 }
 
 module "eip" {
