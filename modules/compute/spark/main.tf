@@ -18,12 +18,14 @@ data "aws_ami" "data_ami" {
 
 
 resource "aws_instance" "primary_node" {
-  count                  = 1
-  ami                    = data.aws_ami.primary_ami.id
-  instance_type          = var.primary_node_instance_type
-  vpc_security_group_ids = [var.security_group_id]
-  private_ip             = var.ip
-  key_name               = var.primary_node_key_name
+  count                       = 1
+  ami                         = data.aws_ami.primary_ami.id
+  instance_type               = var.primary_node_instance_type
+  vpc_security_group_ids      = [var.security_group_id]
+  private_ip                  = var.ip
+  subnet_id                   = var.subnet_id
+  key_name                    = var.primary_node_key_name
+  associate_public_ip_address = true
   root_block_device {
     delete_on_termination = true
   }
@@ -62,11 +64,13 @@ resource "aws_instance" "data_node" {
   tags = {
     Name = lookup(var.hostnames, count.index)
   }
-  ami                    = data.aws_ami.data_ami.id
-  instance_type          = var.data_node_instance_type
-  vpc_security_group_ids = [var.security_group_id]
-  private_ip             = lookup(var.ips, count.index)
-  key_name               = var.data_node_key_name
+  ami                         = data.aws_ami.data_ami.id
+  instance_type               = var.data_node_instance_type
+  subnet_id                   = var.subnet_id
+  vpc_security_group_ids      = [var.security_group_id]
+  private_ip                  = lookup(var.ips, count.index)
+  key_name                    = var.data_node_key_name
+  associate_public_ip_address = true
   root_block_device {
     delete_on_termination = true
   }

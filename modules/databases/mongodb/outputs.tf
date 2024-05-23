@@ -1,7 +1,7 @@
 # outputs.tf
 
-output "mongodb_instance_public_ips" {
-  value = aws_instance.mongodb_instance.*.public_ip
+output "mongodb_eip" {
+  value = aws_instance.mongodb_instance.public_ip
 }
 
 output "mongodb_instance" {

@@ -37,3 +37,9 @@ variable "mongodb_key_name" {
   type        = string
   default     = ""
 }
+
+variable "eip" {
+  description = "The Ip for the instance will be created"
+  type        = string
+  default     = ""
+}

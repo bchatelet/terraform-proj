@@ -1,6 +1,7 @@
 resource "aws_security_group" "sg" {
   name        = "sg"
   description = "Allow some port inbound traffic"
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_security_group_rule" "ingress" {

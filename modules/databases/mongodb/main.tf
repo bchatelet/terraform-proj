@@ -8,10 +8,12 @@ data "aws_ami" "mongodb_ami" {
 }
 
 resource "aws_instance" "mongodb_instance" {
-  ami                    = data.aws_ami.mongodb_ami.id
-  instance_type          = var.instance_type
-  vpc_security_group_ids = [var.security_group_id]
-  key_name               = var.mongodb_key_name
+  ami                         = data.aws_ami.mongodb_ami.id
+  instance_type               = var.instance_type
+  vpc_security_group_ids      = [var.security_group_id]
+  subnet_id                   = var.subnet_id
+  key_name                    = var.mongodb_key_name
+  associate_public_ip_address = true
   root_block_device {
     delete_on_termination = true
   }
