@@ -13,9 +13,10 @@ module "spark" {
   subnet_id                  = module.eip.eip_id
   primary_node_key_name      = "ubuntu-aws-test1"
   data_node_key_name         = "ubuntu-aws-test1"
+  private_key_path           = "/home/ubuntu/ubuntu-aws-test1.pem"
   data_node_instance_type    = "t2.micro"
   primary_node_instance_type = "t2.micro"
-  private_key_path           = "/home/ubuntu/ubuntu-aws-test1.pem"
+
 }
 
 module "sg" {
