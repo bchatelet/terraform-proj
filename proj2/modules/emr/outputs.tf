@@ -9,3 +9,4 @@ output "name" {
 output "master_public_dns" {
   value = "${aws_emr_cluster.emr-spark-cluster.master_public_dns}"
 }
+

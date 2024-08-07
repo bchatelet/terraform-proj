@@ -1,12 +1,39 @@
+ terraform {
+ backend "local" {
+  path="./terraform.tfstate"
+ }
+
+/*  backend "remote" {
+    hostanme     = "app.terraform.io"
+backend "remote" {
+    hostanme     = "app.terraform.io"
+    organization = "tests"
+    workspaces {
+      name = var.workspace_name
+    } 
+ */
+
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+ }
+
+
+## Provider
 provider "aws" {
-  #  shared_credentials_files = ["${path.module}/credentials.tfvars"]
+  region  =var.region
   shared_credentials_files = ["./credentials.tfvars"]
-  region                   = "eu-west-3"
 }
 
 module "s3" {
   source = "./modules/s3"
-  name   = var.name
+}
+
+module "sg" {
+  source = "./modules/security/sg"
+  vpc_id=module.vpc.vpc_id
 }
 
 module "iam" {
@@ -21,7 +48,7 @@ module "security" {
 }
 
 module "emr" {
-  subnet_id                 = module.vpc.subnet_id
+  subnet_id               = module.vpc.subnet_id
   source                    = "./modules/emr"
   name                      = var.name
   release_label             = var.release_label
@@ -32,13 +59,17 @@ module "emr" {
   core_instance_type        = var.core_instance_type
   core_instance_count       = var.core_instance_count
   core_ebs_size             = var.core_ebs_size
-  emr_master_security_group = module.security.emr_master_security_group
-  emr_slave_security_group  = module.security.emr_slave_security_group
+  emr_master_security_group = module.sg.sg_security_group_master_id
+  emr_slave_security_group  = module.sg.sg_security_group_slave_id
   emr_ec2_instance_profile  = module.iam.emr_ec2_instance_profile
-  emr_service_role          = module.iam.emr_service_role
-  emr_autoscaling_role      = module.iam.emr_autoscaling_role
+  emr_service_role          = module.iam.emr_service_role 
+  #emr_autoscaling_role      = module.iam.emr_autoscaling_role
 }
 
 module "vpc" {
   source = "./modules/vpc"
 }  
+
+module "eip" {
+  source = "./modules/networking/eip"
+}

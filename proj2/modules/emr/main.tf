@@ -19,7 +19,7 @@ resource "aws_emr_cluster" "emr-spark-cluster" {
     #emr_managed_slave_security_group  = var.emr_slave_security_group
   }
 
-  ebs_root_volume_size = "12"
+  #ebs_root_volume_size = "12"
 
   master_instance_group {
     name           = "EMR master"

@@ -1,7 +1,6 @@
 # EMR general configurations
 #name                = "spark-app"
-name                = "s3-spark-bucket-new"
-region              = "eu-west-3"
+#name                = "s3-spark-bucket-new"
 key_name            = "ubuntu-aws-test1"
 ingress_cidr_blocks = "0.0.0.0/0"
 release_label       = "emr-5.16.0"
