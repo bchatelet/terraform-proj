@@ -6,8 +6,8 @@ from pymongo import MongoClient
 s3_bucket = 's3-spark-bucket'
 #s3_key ='s3://s3-spark-bucket/PS_20174392719_1491204439457_log.csv'
 s3_key ='PS_20174392719_1491204439457_log.csv'
-#my_your_access_key_id=''
-#my_aws_secret_access_key=''
+#my_your_accesse_key_id=''
+#my_aws_secrette_access_key=''
 
 # MongoDB Configuration
 mongo_uri = 'mongodb://localhost:27017/'
