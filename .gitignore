@@ -1,5 +1,5 @@
 # Local .terraform directories
-**/.terraform/*
+*/.terraform
 
 # .tfstate files
 *.tfstate
@@ -32,10 +32,9 @@ override.tf.json
 
 # Ignore CLI configuration files
 .gitignore
-.terraformrc
-.terraform
-terraform.tfstate.d
-terraform.rc
+*/.terraformrc
+*/terraform.tfstate.d
+*terraform.rc
 *.pem
 .terraform.lock.hcl
-**terraform.tfstate.d/
+*/terraform.tfstate.d/
