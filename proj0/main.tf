@@ -1,5 +1,6 @@
 # main.tf
   terraform {
+    required_version = ">= 1.0.0"
  backend "local" {
     path="./terraform.tfstate"
  }
@@ -17,6 +18,7 @@ backend "remote" {
   required_providers {
     aws = {
       source = "hashicorp/aws"
+      version = "~> 4.0"
     }
   }
 }
@@ -24,18 +26,17 @@ backend "remote" {
 provider "aws" {
   region                   = var.region
   shared_credentials_files = ["./credentials.tfvars"]
-
 }
 
 
 
 module "mongodb" {
   source            = "./modules/databases/mongodb"
-  instance_type     = "t2.large"
+  instance_type     = var.instance_type
   security_group_id = module.sg.sg_security_group_id
   subnet_id         = module.eip.vpc_subnet_id
-  mongodb_key_name  = "ubuntu-aws-test1"
-  private_key_path  = "/home/ubuntu/ubuntu-aws-test1.pem"
+  mongodb_key_name  = var.key_name
+  private_key_path  = var.private_key_path
   eip               = module.eip.eip_id
 }
 module "sg" {

@@ -5,8 +5,8 @@ on:
 
 jobs:
   print-hello-world:
-    runs-on: ubuntu-latest 
+  runs-on: ubuntu-latest
 
-    steps: 
-      - name: Say hello
-        run: echo "hello world" 
+  steps:
+    - name: Say hello
+      run: echo "hello world"
