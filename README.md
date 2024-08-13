@@ -11,7 +11,7 @@ Arborescence :
 
 -**proj2** : déploiement d'un de l'application Spark-Apache à partir du service Emr-Aws. 
 
--**proj3**: projet de test pour la mise en oeuvre de Github Actions. 
+-****.github/workflows**: configuration pour CI/CD avec Github Actions. 
 
 -**scripts**: scripts Python de tests de chargement de données Csv, depuis un bucket s3 vers MongoDb. 
 
