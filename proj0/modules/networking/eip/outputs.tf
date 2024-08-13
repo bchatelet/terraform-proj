@@ -11,3 +11,7 @@ output "vpc_id" {
 output "vpc_subnet_id" {
   value = aws_subnet.public_subnet.id
 }
+output "vpc_subnet_id" {
+  value = var.aws_instance_id
+  }
+
