@@ -40,9 +40,9 @@ jobs:
       # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan -input=false 
-        working-directory: infrastructure
+        working-directory: proj0
       # On push to "main", build or change infrastructure according to Terraform configuration files
       - name: Terraform Apply
         if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
         run: terraform apply -auto-approve -input=false 
-        working-directory: infrastructure
+        working-directory: proj0
