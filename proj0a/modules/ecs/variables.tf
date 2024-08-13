@@ -21,6 +21,7 @@ variable "log_group_name" {
 variable "region" {
   description = "The AWS region."
   type        = string
+  default="eu-west-3"
 }
 
 variable "subnet_ids" {
@@ -41,5 +42,5 @@ variable "service_registry_arn" {
 variable "efs_id" {
   description = "The ID of the EFS file system."
   type        = string
-  default=""
+  default     = ""
 }

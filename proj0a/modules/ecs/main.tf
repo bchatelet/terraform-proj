@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "mongo_task_definition" {
       ],
       secrets = [
         {
-          name      = "MONGO_INITDB_ROOT_PASSWORD"
+          name = "MONGO_INITDB_ROOT_PASSWORD"
           valueFrom = var.ssm_parameter_name
         }
       ],

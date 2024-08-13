@@ -1,6 +1,6 @@
 variable "name" {}
 variable "key_name" {}
-variable "release_label" {}
+
 variable "applications" {
   type = list(string)
   #default = ["Hadoop", "Ganglia", "Spark"]
@@ -48,5 +48,10 @@ variable "emr_service_role" {
 variable "emr_autoscaling_role" {
   #  default = module.iam.emr_autoscaling_role
   default = ""
+}
+
+variable "release_label" {
+  #  default = module.iam.emr_autoscaling_role
+  default=  "emr-5.32.0"  # Ensure this is valid
 }
 

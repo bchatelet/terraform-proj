@@ -5,7 +5,7 @@ variable "disk_size" {
 
 variable "AZ" {
   type    = string
-  default = "eu-west-3"
+  default = "eu-west-3c"
 }
 
 variable "instance_id" {

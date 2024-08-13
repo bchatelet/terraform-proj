@@ -1,6 +1,6 @@
 
 resource "aws_eip" "eip" {
-  domain = "vpc"
+  instance = var.aws_instance_id
 }
 
 resource "aws_vpc" "main" {

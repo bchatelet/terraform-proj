@@ -14,6 +14,7 @@ resource "aws_instance" "mongodb_instance" {
   subnet_id                   = var.subnet_id
   key_name                    = var.mongodb_key_name
   associate_public_ip_address = true
+  iam_instance_profile        = aws_iam_instance_profile.example.name
   root_block_device {
     delete_on_termination = true
   }
@@ -39,5 +40,9 @@ resource "aws_instance" "mongodb_instance" {
   tags = {
     Name = "Mongodb_instance"
   }
+}
+
+resource "aws_iam_instance_profile" "example" {
+  role = var.ec2_management_role_name
 }
 

@@ -4,7 +4,7 @@ output "mongodb_eip" {
   value = aws_instance.mongodb_instance.public_ip
 }
 
-output "mongodb_instance" {
+output "mongodb_instance_id" {
   value = aws_instance.mongodb_instance.id
 }
 

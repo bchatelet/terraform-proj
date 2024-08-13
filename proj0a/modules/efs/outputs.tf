@@ -1,9 +1,9 @@
 output "efs_id" {
-  value = aws_efs_file_system.mongolab_file_system.id
+  value = aws_efs_file_system.mongoefs.id
 }
 
 output "efs_arn" {
-  value = aws_efs_file_system.mongolab_file_system.arn
+  value = aws_efs_file_system.mongoefs.arn
 }
 
 output "efs_security_group_id" {

@@ -4,7 +4,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-
+*.gz
 # Crash log files
 crash.log
 crash.*.log

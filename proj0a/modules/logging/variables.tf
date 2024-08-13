@@ -1,6 +1,7 @@
 variable "log_group_name" {
   description = "The name of the CloudWatch log group."
   type        = string
+  default="/ecs/mongolab"
 }
 
 variable "retention_in_days" {

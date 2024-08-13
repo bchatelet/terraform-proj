@@ -1,9 +1,10 @@
- terraform {
- backend "local" {
-  path="./terraform.tfstate"
- }
+terraform {
+  required_version = ">= 1.0.0"
+  backend "local" {
+    path = "./terraform.tfstate"
+  }
 
-/*  backend "remote" {
+  /*  backend "remote" {
     hostanme     = "app.terraform.io"
 backend "remote" {
     hostanme     = "app.terraform.io"
@@ -15,15 +16,16 @@ backend "remote" {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
     }
   }
- }
+}
 
 
 ## Provider
 provider "aws" {
-  region  =var.region
+  region                   = var.region
   shared_credentials_files = ["./credentials.tfvars"]
 }
 
@@ -33,7 +35,7 @@ module "s3" {
 
 module "sg" {
   source = "./modules/security/sg"
-  vpc_id=module.vpc.vpc_id
+  vpc_id = module.vpc.vpc_id
 }
 
 module "iam" {
@@ -48,10 +50,9 @@ module "security" {
 }
 
 module "emr" {
-  subnet_id               = module.vpc.subnet_id
+  subnet_id                 = module.vpc.subnet_id
   source                    = "./modules/emr"
   name                      = var.name
-  release_label             = var.release_label
   applications              = var.applications
   key_name                  = var.key_name
   master_instance_type      = var.master_instance_type
@@ -62,13 +63,13 @@ module "emr" {
   emr_master_security_group = module.sg.sg_security_group_master_id
   emr_slave_security_group  = module.sg.sg_security_group_slave_id
   emr_ec2_instance_profile  = module.iam.emr_ec2_instance_profile
-  emr_service_role          = module.iam.emr_service_role 
+  emr_service_role          = module.iam.emr_service_role
   #emr_autoscaling_role      = module.iam.emr_autoscaling_role
 }
 
 module "vpc" {
   source = "./modules/vpc"
-}  
+}
 
 module "eip" {
   source = "./modules/networking/eip"

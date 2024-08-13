@@ -5,9 +5,9 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_security_group_rule" "ingress" {
-  count             = length(var.inbound_ports)
+  count = length(var.inbound_ports)
   #count             = 1
-   type              = "ingress"
+  type              = "ingress"
   from_port         = var.inbound_ports[count.index]
   to_port           = var.inbound_ports[count.index]
   protocol          = "tcp"
@@ -31,7 +31,7 @@ resource "aws_security_group" "emr_master" {
   vpc_id                 = var.vpc_id
   revoke_rules_on_delete = true
 
-/*   ingress {
+  /*   ingress {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
@@ -53,32 +53,32 @@ resource "aws_security_group" "emr_master" {
   }
 
 
-   ingress {
+  ingress {
     from_port   = 4040
-     to_port     = 4040
-     protocol    = "tcp"
-     cidr_blocks = ["${var.ingress_cidr_blocks}"]
-   }
+    to_port     = 4040
+    protocol    = "tcp"
+    cidr_blocks = ["${var.ingress_cidr_blocks}"]
+  }
 
-   ingress {
-     from_port   = 8888
-     to_port     = 8888
-     protocol    = "tcp"
-     cidr_blocks = ["${var.ingress_cidr_blocks}"]
-   }
+  ingress {
+    from_port   = 8888
+    to_port     = 8888
+    protocol    = "tcp"
+    cidr_blocks = ["${var.ingress_cidr_blocks}"]
+  }
 
-   ingress {
-     from_port   = 20888
-     to_port     = 20888
-     protocol    = "tcp"
-     cidr_blocks = ["${var.ingress_cidr_blocks}"]
-   }
-      ingress {
-     from_port   = 22
-     to_port     = 22
-     protocol    = "tcp"
-     cidr_blocks = ["${var.ingress_cidr_blocks}"]
-   }
+  ingress {
+    from_port   = 20888
+    to_port     = 20888
+    protocol    = "tcp"
+    cidr_blocks = ["${var.ingress_cidr_blocks}"]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${var.ingress_cidr_blocks}"]
+  }
 
   egress {
     from_port   = 0

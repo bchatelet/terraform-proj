@@ -44,7 +44,7 @@ resource "aws_instance" "mongolab_ec2_instance" {
     Name = var.instance_name
   }
 
- provisioner "remote-exec" {
+  provisioner "remote-exec" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
@@ -58,12 +58,12 @@ resource "aws_instance" "mongolab_ec2_instance" {
       "exit"
     ]
   }
-  }
-  
+}
 
 
 
 
-  
+
+
 
 

@@ -1,10 +1,33 @@
+terraform {
+  required_version = ">= 1.0.0"
+  backend "local" {
+    path = "./terraform.tfstate"
+  }
+
+  /*  backend "remote" {
+    hostanme     = "app.terraform.io"
+backend "remote" {
+    hostanme     = "app.terraform.io"
+    organization = "tests"
+    workspaces {
+      name = var.workspace_name
+    } 
+ */
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
 module "vpc" {
   source = "./modules/vpc"
   # Provide necessary inputs for VPC
 }
 
 module "ec2" {
-  source   = "./modules/ec2"
+  source = "./modules/ec2"
   #public_key_path    = "~/.ssh/mongolab.pub"
   security_group_name = "ec2_sg"
   vpc_id              = module.vpc.vpc_id
@@ -13,18 +36,18 @@ module "ec2" {
   instance_name       = "mongolab-ec2-instance"
 }
 
- module "ssm" {
+module "ssm" {
   source          = "./modules/ssm"
   parameter_name  = "/mongodb/MONGO_INITDB_ROOT_PASSWORD"
   parameter_value = "Dummy" # Replace with secure storage
-}  
+}
 
- module "efs" {
+module "efs" {
   source     = "./modules/efs"
   vpc_id     = module.vpc.vpc_id
   vpc_cidr   = module.vpc.vpc_cidr
   subnet_ids = module.vpc.public_subnet_ids
-} 
+}
 
 module "iam" {
   source            = "./modules/iam"
@@ -40,9 +63,9 @@ module "logging" {
 }
 
 module "ecs" {
-  source               = "./modules/ecs"
-  execution_role_arn   = module.iam.ecs_execution_role_arn
-  task_role_arn        = module.iam.ecs_task_role_arn
+  source             = "./modules/ecs"
+  execution_role_arn = module.iam.ecs_execution_role_arn
+  task_role_arn      = module.iam.ecs_execution_role_arn
   ssm_parameter_name   = module.ssm.ssm_parameter_name
   log_group_name       = module.logging.log_group_name
   region               = var.aws_region

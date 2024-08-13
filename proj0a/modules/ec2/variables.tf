@@ -34,17 +34,17 @@ variable "subnet_id" {
 variable "user_data" {
   description = "The user data script to use for the instance."
   type        = string
-  default=""
+  default     = ""
 }
 
 variable "instance_name" {
   description = "The name tag for the EC2 instance."
   type        = string
-  default="mongodb"
+  default     = "mongodb"
 }
 
 variable "mongo_setup_script" {
-  default =<<-EOF
+  default = <<-EOF
                 echo "debut script install" > /var/tmp/deb.log
                 # Update your system
                 sudo apt update -y

@@ -11,8 +11,8 @@ resource "aws_security_group" "efs_sg" {
   }
 }
 
-resource "aws_efs_file_system" "mongolab_file_system" {
-  creation_token = "mongoefs"
+resource "aws_efs_file_system" "mongoefs" {
+#creation_token = "mongoefs"
   encrypted      = true
 
   tags = {
@@ -22,7 +22,7 @@ resource "aws_efs_file_system" "mongolab_file_system" {
 
 resource "aws_efs_mount_target" "efs_mount_target" {
   count           = length(var.subnet_ids)
-  file_system_id  = aws_efs_file_system.mongolab_file_system.id
+  file_system_id  = aws_efs_file_system.mongoefs.id
   subnet_id       = var.subnet_ids[count.index]
   security_groups = [aws_security_group.efs_sg.id]
 }

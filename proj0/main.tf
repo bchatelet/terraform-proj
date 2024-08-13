@@ -1,11 +1,11 @@
 # main.tf
-  terraform {
-    required_version = ">= 1.0.0"
- backend "local" {
-    path="./terraform.tfstate"
- }
+terraform {
+  required_version = ">= 1.0.0"
+  backend "local" {
+    path = "./terraform.tfstate"
+  }
 
-/*  backend "remote" {
+  /*  backend "remote" {
     hostanme     = "app.terraform.io"
 backend "remote" {
     hostanme     = "app.terraform.io"
@@ -17,7 +17,7 @@ backend "remote" {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 4.0"
     }
   }
@@ -31,13 +31,14 @@ provider "aws" {
 
 
 module "mongodb" {
-  source            = "./modules/databases/mongodb"
-  instance_type     = var.instance_type
-  security_group_id = module.sg.sg_security_group_id
-  subnet_id         = module.eip.vpc_subnet_id
-  mongodb_key_name  = var.key_name
-  private_key_path  = var.private_key_path
-  eip               = module.eip.eip_id
+  source                   = "./modules/databases/mongodb"
+  instance_type            = var.instance_type
+  security_group_id        = module.sg.sg_security_group_id
+  subnet_id                = module.eip.vpc_subnet_id
+  mongodb_key_name         = var.key_name
+  private_key_path         = var.private_key_path
+  eip                      = module.eip.eip_id
+  ec2_management_role_name = module.iam.ec2_management_role_name
 }
 module "sg" {
   source        = "./modules/security/sg"
@@ -46,14 +47,20 @@ module "sg" {
 
 }
 
+module "iam" {
+  source = "./modules/iam"
+}
+
+
 module "eip" {
-  source = "./modules/networking/eip"
+  source          = "./modules/networking/eip"
+  aws_instance_id = module.mongodb.mongodb_instance_id
 }
 
 module "ebs" {
   source      = "./modules/storage/ebs"
   disk_size   = 5
-  instance_id = [module.mongodb.mongodb_instance]
+  instance_id = [module.mongodb.mongodb_instance_id]
   volume_id   = module.ebs.ebs_volume_id
 }
 

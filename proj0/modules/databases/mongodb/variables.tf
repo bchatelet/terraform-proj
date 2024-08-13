@@ -43,3 +43,9 @@ variable "eip" {
   type        = string
   default     = ""
 }
+
+variable "ec2_management_role_name" {
+  description = "Role"
+  type        = string
+  default     = ""
+}
