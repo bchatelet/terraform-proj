@@ -14,7 +14,7 @@ Arborescence :
 -**proj1**: déploiement d'un de l'application Spark-Apache  avec un serveur maitre, contenant l'application Spark, et deux serveurs esclaves.  
 
 
--**proj2** : déploiement d'un de l'application Spark-Apache à partir du service Emr-Aws de Aws. 
+-**proj2** : déploiement d'un de l'application Spark-Apache à partir du service Emr-Aws. 
 
 
 -**proj3**: projet de test pour la mise en ouevre de github actions 
