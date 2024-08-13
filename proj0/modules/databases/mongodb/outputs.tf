@@ -8,6 +8,10 @@ output "mongodb_instance_id" {
   value = aws_instance.mongodb_instance.id
 }
 
+output "my_mongodb_instance_id" {
+  value = aws_instance.mongodb_instance.id
+}
+
 output "mongodb_ami" {
   value = aws_instance.mongodb_instance.ami
 }
