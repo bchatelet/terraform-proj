@@ -31,6 +31,7 @@ provider "aws" {
 
 
 module "mongodb" {
+  private_key=var.private_key
   source                   = "./modules/databases/mongodb"
   instance_type            = var.instance_type
   security_group_id        = module.sg.sg_security_group_id

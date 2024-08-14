@@ -15,4 +15,9 @@ variable "instance_type" {
   default = "t2.large"
 }
 
+variable "private_key" {
+  type      = string
+  sensitive = true
+}
+
 
