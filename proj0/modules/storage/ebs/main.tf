@@ -2,6 +2,7 @@ resource "aws_ebs_volume" "vol" {
   count             = length(var.instance_id)
   availability_zone = var.AZ
   size              = var.disk_size
+  availability_zone = var.instance_id[count.index].availability_zone
 }
 
 resource "aws_volume_attachment" "ebs" {
@@ -10,3 +11,5 @@ resource "aws_volume_attachment" "ebs" {
   instance_id = var.instance_id[count.index]
   volume_id   = var.volume_id[count.index]
 }
+
+  
