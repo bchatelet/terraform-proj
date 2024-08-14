@@ -47,9 +47,12 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
+        env:
+          TF_VAR_private_key: ${{ secrets.AWS_PRIVATE_KEY }}
         run: terraform plan -input=false 
         working-directory: proj0
       # On push to "main", build or change infrastructure according to Terraform configuration files
+      
       - name: Terraform Apply
         env:
           TF_VAR_private_key: ${{ secrets.AWS_PRIVATE_KEY }}
