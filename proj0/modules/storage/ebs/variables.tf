@@ -5,8 +5,7 @@ variable "disk_size" {
 
 
 variable "instance_id" {
-  type    = list(string)
-  default = [""]
+  type = list(string)  # assuming it's a list of instance IDs
 }
 
 variable "volume_id" {

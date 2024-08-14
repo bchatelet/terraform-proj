@@ -1,9 +1,11 @@
 resource "aws_ebs_volume" "vol" {
   count             = length(var.instance_id)
-  availability_zone = var.AZ
   size              = var.disk_size
-  availability_zone = var.instance_id[count.index].availability_zone
+  
+  # Fetching the availability zone using a data source
+  availability_zone = data.aws_instance.instance[count.index].availability_zone
 }
+
 
 resource "aws_volume_attachment" "ebs" {
   device_name = "/dev/sdh"
@@ -12,4 +14,8 @@ resource "aws_volume_attachment" "ebs" {
   volume_id   = var.volume_id[count.index]
 }
 
+data "aws_instance" "instance" {
+  count = length(var.instance_id)
+  instance_id = var.instance_id[count.index]
+}
   
