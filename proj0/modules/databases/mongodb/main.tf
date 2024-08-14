@@ -23,7 +23,7 @@ resource "aws_instance" "mongodb_instance" {
       type        = "ssh"
       user        = "ubuntu"
       host        = self.public_ip
-      private_key = file(var.private_key_path)
+      private_key = var.private_key
     }
     inline = [
       "sudo apt-get install gnupg curl",

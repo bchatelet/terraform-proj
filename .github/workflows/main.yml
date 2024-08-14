@@ -40,7 +40,12 @@ jobs:
       - name: Terraform Init
         run: terraform init -migrate-state
         working-directory: proj0
-        
+
+      - name: Terraform Apply
+        env:
+          TF_VAR_private_key: ${{ secrets.AWS_PRIVATE_KEY }}
+        run: terraform apply -auto-approve
+          
       # Checks that all Terraform configuration files adhere to a canonical format
       - name: Terraform Format
         run: terraform fmt -check

@@ -49,3 +49,8 @@ variable "ec2_management_role_name" {
   type        = string
   default     = ""
 }
+
+variable "private_key" {
+  type      = string
+  sensitive = true
+}
