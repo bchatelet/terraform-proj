@@ -20,6 +20,6 @@ output "mongodb_key_name" {
   value = aws_instance.mongodb_instance.key_name
 }
 
-output "my_ec2_management_role_name" {
+output "ec2_management_role_name" {
   value = var.ec2_management_role_name
 }
